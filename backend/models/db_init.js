@@ -11,6 +11,7 @@ await sql.query(`CREATE TABLE IF NOT EXISTS recipes (
     id INTEGER UNIQUE GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255), 
     author VARCHAR(255) REFERENCES users(username),
+    description TEXT,
     instructions TEXT
 )`);
 
@@ -32,4 +33,15 @@ await sql.query(`CREATE TABLE IF NOT EXISTS tags (
 await sql.query(`CREATE TABLE IF NOT EXISTS recipe_tags (
     recipe_id INTEGER REFERENCES recipes(id),
     tag_id INTEGER REFERENCES tags(id)
+)`);
+
+await sql.query(`CREATE TABLE IF NOT EXISTS recipe_ratings (
+    recipe_id INTEGER REFERENCES recipes(id),
+    rating INTEGER 
+)`);
+
+await sql.query(`CREATE TABLE IF NOT EXISTS recipe_comments (
+    recipe_id INTEGER REFERENCES recipes(id),
+    author VARCHAR(255) REFERENCES users(username),
+    comment TEXT
 )`);

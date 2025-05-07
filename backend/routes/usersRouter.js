@@ -1,9 +1,9 @@
 import { Router } from "express";
+import { addToken } from "./utils.js";
 import {
   loginPagePost,
   registerPagePost,
 } from "../controllers/usersController.js";
-import { addToken } from "./utils.js";
 const usersRouter = Router();
 
 usersRouter.post("/login", loginPagePost);

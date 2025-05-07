@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { findUser, createUser } from "../models/queries.js";
+import { findUser, createUser } from "../models/userQueries.js";
 
 const loginPagePost = async (req, res) => {
   const { username, password } = req.body;
@@ -8,7 +8,13 @@ const loginPagePost = async (req, res) => {
   if (user) {
     const match = await bcrypt.compare(password, user["password"]);
     if (match) {
-      const token = jwt.sign({ user }, "secret", { expiresIn: "48h" });
+      const token = jwt.sign(
+        { user: { username: user["username"] } },
+        "secret",
+        {
+          expiresIn: "48h",
+        }
+      );
       res.json({ token });
     } else {
       res.sendStatus(403);
@@ -19,9 +25,9 @@ const loginPagePost = async (req, res) => {
 };
 
 const registerPagePost = async (req, res) => {
-  const { username, password, confirmPassword } = req.body;
+  const { username, password, confirm_password } = req.body;
 
-  if (password != confirmPassword) {
+  if (password != confirm_password) {
     return res.status(400).send("Passwords do not match");
   }
 
