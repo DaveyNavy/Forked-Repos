@@ -1,8 +1,15 @@
 import { Router } from "express";
-
+import {
+  loginPagePost,
+  registerPagePost,
+} from "../controllers/usersController.js";
+import { addToken } from "./utils.js";
 const usersRouter = Router();
-usersRouter.get("/login", (req, res) => {
-  res.send("Login!");
+
+usersRouter.post("/login", loginPagePost);
+usersRouter.post("/register", registerPagePost);
+usersRouter.get("/protected", addToken, (req, res) => {
+  res.send(req.token);
 });
 
 export default usersRouter;
