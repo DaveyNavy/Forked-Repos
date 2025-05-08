@@ -4,6 +4,25 @@ import { neon } from "@neondatabase/serverless";
 const sql = neon(process.env.DATABASE_URL);
 
 /**
+ * Gets a recipe by id.
+ * @param {Number} id - The id of the recipe.
+ * @returns Returns the recipe object.
+ */
+async function getRecipe(id) {
+  const result = await sql.query(`SELECT * FROM recipes WHERE id = $1`, [id]);
+  return result[0];
+}
+
+/**
+ * Gets all recipes from the table.
+ * @returns Returns a list of all recipes.
+ */
+async function getRecipes() {
+  const result = await sql.query(`SELECT * FROM recipes`);
+  return result;
+}
+
+/**
  * Inserts a recipe into the recipes table. Does not insert associated tags or ingredients.
  * @param {String} name - The name of the recipe.
  * @param {String} author - The username of the user uploading the recipe. Must be a valid username.
@@ -34,8 +53,10 @@ async function addTags(id, tags) {
       const result = await sql.query(`SELECT id FROM tags WHERE name = $1`, [
         tag,
       ]);
-      const tag_id = result[0]["id"];
-      await sql.query(`INSERT INTO recipe_tags VALUES ($1, $2)`, [id, tag_id]);
+      if (result.length > 0) {
+        const tag_id = result[0]["id"];
+        await sql.query(`INSERT INTO recipe_tags VALUES ($1, $2)`, [id, tag_id]);
+      }
     });
   } catch (err) {
     throw new Error("Invalid tag name!");
@@ -70,4 +91,4 @@ async function addIngredients(id, ingredients) {
   });
 }
 
-export { addRecipe, addTags, addIngredients };
+export { getRecipe, getRecipes, addRecipe, addTags, addIngredients };

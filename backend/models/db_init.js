@@ -37,6 +37,7 @@ await sql.query(`CREATE TABLE IF NOT EXISTS recipe_tags (
 
 await sql.query(`CREATE TABLE IF NOT EXISTS recipe_ratings (
     recipe_id INTEGER REFERENCES recipes(id),
+    author VARCHAR(255) REFERENCES users(username),
     rating INTEGER 
 )`);
 
