@@ -22,6 +22,19 @@ async function getRecipes() {
   return result;
 }
 
+async function getRecipesWithTag(tag) {
+  const result = await sql.query(`SELECT id FROM tags WHERE name = $1`, [tag]);
+  if (result.length == 0) {
+    return [];
+  }
+  const tag_id = result[0]["id"];
+  return await sql.query(`SELECT recipes.* FROM recipes JOIN recipe_tags ON recipes.id = recipe_tags.recipe_id WHERE recipe_tags.tag_id = $1`, [tag_id]);
+}
+
+async function getRecipesWithUploader(uploader) {
+  return await sql.query(`SELECT * FROM recipes WHERE recipes.author = $1`, [uploader]);
+}
+
 /**
  * Inserts a recipe into the recipes table. Does not insert associated tags or ingredients.
  * @param {String} name - The name of the recipe.
@@ -91,4 +104,4 @@ async function addIngredients(id, ingredients) {
   });
 }
 
-export { getRecipe, getRecipes, addRecipe, addTags, addIngredients };
+export { getRecipe, getRecipes, getRecipesWithTag, getRecipesWithUploader, addRecipe, addTags, addIngredients };
