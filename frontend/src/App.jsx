@@ -5,6 +5,7 @@ import HomePage from './HomePage';
 import MainPage from './MainPage';
 import RecipesPage from './RecipesPage';
 import ProfilePage from './ProfilePage';
+import UploadPage from './UploadPage';
 import './App.css'
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
           <li>
             <Link to="/profile">Profile Page</Link>
           </li>
+          <li> 
+            <Link to="/upload">Upload Page</Link>
+          </li>
         </ul>
       </nav>
 
@@ -31,6 +35,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/recipes" element={<RecipesPage />} />
+        <Route path="/upload" element={<UploadPage />}/>
         <Route
           path="/profile"
           element={
