@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import MainPage from './MainPage';
 import RecipesPage from './RecipesPage';
 import ProfilePage from './ProfilePage';
+import UploadPage from './UploadPage';
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <li><Link to="/main">Main Page</Link></li>
           <li><Link to="/recipes">Recipes Page</Link></li>
           <li><Link to="/profile/louis">Profile Page</Link></li>
+          <li><Link to="/upload">Upload Page</Link></li>
         </ul>
       </nav>
 
@@ -23,6 +25,7 @@ function App() {
         <Route path="/main" element={<MainPage />} />
         <Route path="/recipes" element={<RecipesPage />} />
         <Route path="/profile/:id" element={<ProfilePage />} />
+        <Route path="/upload" element={<UploadPage />}/>
       </Routes>
     </Router>
   );
