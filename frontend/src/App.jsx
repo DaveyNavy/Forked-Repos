@@ -4,12 +4,8 @@ import HomePage from './HomePage';
 import MainPage from './MainPage';
 import RecipesPage from './RecipesPage';
 import ProfilePage from './ProfilePage';
-<<<<<<< HEAD
 import UploadPage from './UploadPage';
 import './App.css'
-=======
-import './App.css';
->>>>>>> 725bbb92738ec81f37d3f9ebdfeb51085d858a46
 
 function App() {
   // Retrive Dylan token from local storage on initial load
@@ -35,7 +31,6 @@ function App() {
     <Router>
       <nav>
         <ul>
-<<<<<<< HEAD
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -51,20 +46,6 @@ function App() {
           <li> 
             <Link to="/upload">Upload Page</Link>
           </li>
-=======
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/main">Main Page</Link></li>
-          <li><Link to="/recipes">Recipes Page</Link></li>
-          {token ? (
-            <>
-                <li><Link to={`/profile/${username}`}>Profile Page</Link></li>
-                <li><button onClick={handleLogout}>Logout</button></li>
-            </>
-          ) : (
-            <li><Link to="/login">Login</Link></li>
-          )}
-          <li><Link to="/profile/louis">Profile Page</Link></li>
->>>>>>> 725bbb92738ec81f37d3f9ebdfeb51085d858a46
         </ul>
       </nav>
 

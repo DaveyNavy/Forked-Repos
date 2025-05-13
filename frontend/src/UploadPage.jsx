@@ -16,7 +16,6 @@ function UploadPage() {
     setInputs(values => ({...values, [name]: value}))
   }
 
-  
 
   const handleSubmit = (event) => {
     event.preventDefault();
