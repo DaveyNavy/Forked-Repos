@@ -67,7 +67,6 @@ function UploadPage() {
             />
           </label>
           <input type="submit" />
-        </form>
 
         <div>
           <h1>Add Ingredients:</h1>
@@ -89,8 +88,6 @@ function UploadPage() {
         </ul>
 
         </div>
-        <div>
-            <form method="post" onSubmit={handleFormSubmit}>
             <label>
                   type of cuisine:
                     <select name="selectedcusine" multiple={false} defaultValue="">
@@ -148,7 +145,6 @@ function UploadPage() {
                 <hr />
 
               </form>
-                  </div>
           <button type="reset">reset</button>
           <button type="submit">submit</button>
       </>
