@@ -1,5 +1,13 @@
 import jwt from "jsonwebtoken";
-import { getRecipe, getRecipes, getRecipesWithTag, getRecipesWithUploader, addRecipe, addIngredients, addTags } from "../models/recipeQueries.js";
+import {
+  getRecipe,
+  getRecipes,
+  getRecipesWithTag,
+  getRecipesWithUploader,
+  addRecipe,
+  addIngredients,
+  addTags,
+} from "../models/recipeQueries.js";
 
 const recipesPageGet = async (req, res) => {
   const id = req.params.id;
@@ -33,6 +41,7 @@ const recipesPagePost = async (req, res) => {
     res.sendStatus(403);
   }
 
+  console.log(req.body);
   const { recipe_name, description, steps, ingredients, tags } = req.body;
   const id = await addRecipe(recipe_name, user["username"], description, steps);
   await addIngredients(id, ingredients);
@@ -40,4 +49,9 @@ const recipesPagePost = async (req, res) => {
   res.sendStatus(200);
 };
 
-export { recipesPageGet, recipesTagPageGet, recipesUploaderPageGet, recipesPagePost };
+export {
+  recipesPageGet,
+  recipesTagPageGet,
+  recipesUploaderPageGet,
+  recipesPagePost,
+};

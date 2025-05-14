@@ -1,10 +1,12 @@
 import express from "express";
+import cors from "cors";
 import usersRouter from "./routes/usersRouter.js";
 import recipesRouter from "./routes/recipesRouter.js";
 import commentsRouter from "./routes/commentsRouter.js";
 import ratingsRouter from "./routes/ratingsRouter.js";
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
