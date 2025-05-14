@@ -1,27 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import HomePage from './HomePage';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import MainPage from './MainPage';
 import RecipesPage from './RecipesPage';
 import ProfilePage from './ProfilePage';
 import UploadPage from './UploadPage';
 import './App.css';
+import NavBar from './NavBar';
+import './NavBar.css'
 
 function App() {
   return (
     <Router>
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/main">Main Page</Link></li>
-          <li><Link to="/recipes">Recipes Page</Link></li>
-          <li><Link to="/profile/louis">Profile Page</Link></li>
-          <li><Link to="/upload">Upload Page</Link></li>
-        </ul>
-      </nav>
-
+      <NavBar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/recipes" element={<RecipesPage />} />
         <Route path="/profile/:id" element={<ProfilePage />} />
