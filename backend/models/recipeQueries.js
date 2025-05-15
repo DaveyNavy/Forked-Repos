@@ -10,6 +10,9 @@ const sql = neon(process.env.DATABASE_URL);
  */
 async function getRecipe(id) {
   const result = await sql.query(`SELECT * FROM recipes WHERE id = $1`, [id]);
+  if (result.length == 0) {
+    throw new Error(`No recipe exists with id ${id}`);
+  }
   return result[0];
 }
 
@@ -25,7 +28,7 @@ async function getRecipes() {
 async function getRecipesWithTag(tag) {
   const result = await sql.query(`SELECT id FROM tags WHERE name = $1`, [tag]);
   if (result.length == 0) {
-    return [];
+    throw new Error(`No tag exists with name ${tag}`);
   }
   const tag_id = result[0]["id"];
   return await sql.query(`SELECT recipes.* FROM recipes JOIN recipe_tags ON recipes.id = recipe_tags.recipe_id WHERE recipe_tags.tag_id = $1`, [tag_id]);
@@ -53,6 +56,11 @@ async function addRecipe(name, author, description, instructions) {
   } catch (err) {
     throw new Error("Uploader username does not exist!");
   }
+}
+
+async function getTags() {
+  const result = await sql.query(`SELECT name FROM tags`);
+  return result.map((obj) => obj.name);
 }
 
 /**
@@ -104,4 +112,4 @@ async function addIngredients(id, ingredients) {
   });
 }
 
-export { getRecipe, getRecipes, getRecipesWithTag, getRecipesWithUploader, addRecipe, addTags, addIngredients };
+export { getRecipe, getRecipes, getRecipesWithTag, getRecipesWithUploader, addRecipe, getTags, addTags, addIngredients };

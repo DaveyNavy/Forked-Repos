@@ -6,24 +6,38 @@ import {
   getRecipesWithUploader,
   addRecipe,
   addIngredients,
+  getTags,
   addTags,
 } from "../models/recipeQueries.js";
 
 const recipesPageGet = async (req, res) => {
   const id = req.params.id;
   if (id) {
-    const recipe = await getRecipe(parseInt(id));
-    res.json(recipe);
+    try {
+      const recipe = await getRecipe(parseInt(id));
+      res.json(recipe);
+    } catch (err) {
+      res.sendStatus(404);
+    }
   } else {
     const recipes = await getRecipes();
     res.json(recipes);
   }
 };
 
+const recipesTagsPageGet = async (req, res) => {
+  const tags = await getTags();
+  res.json(tags);
+};
+
 const recipesTagPageGet = async (req, res) => {
-  const tag = req.params.tag;
-  const recipes = await getRecipesWithTag(tag);
-  res.json(recipes);
+  try {
+    const tag = req.params.tag;
+    const recipes = await getRecipesWithTag(tag);
+    res.json(recipes);
+  } catch (err) {
+    res.json([]);
+  }
 };
 
 const recipesUploaderPageGet = async (req, res) => {
@@ -51,6 +65,7 @@ const recipesPagePost = async (req, res) => {
 
 export {
   recipesPageGet,
+  recipesTagsPageGet,
   recipesTagPageGet,
   recipesUploaderPageGet,
   recipesPagePost,
