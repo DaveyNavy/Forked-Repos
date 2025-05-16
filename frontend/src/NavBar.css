@@ -20,6 +20,13 @@
   justify-self: center;
 }
 
+.navbar-right ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+
+
 .navbar-left .logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -28,16 +35,16 @@
 }
 .navbar-right > ul {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+  gap:0.1rem ;
 }
 
 li {
-  padding: 1rem 3rem;
-  flex: 1;
+  padding: 0.7rem 0.5rem;
   text-align: center;
+  list-style:none
 }
 
-li:hover {
-  background-color: #534554;
+.navbar li:hover {
+  background-color: #d6cad7;
 }

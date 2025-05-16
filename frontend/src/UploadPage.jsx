@@ -43,47 +43,53 @@ function UploadPage() {
   return (
     <>
       <form onSubmit={handleFormSubmit}>
-        <label>
+        <label className="form-label">
           {" "}
           Enter your recipe name:
-          <input
-            type="text"
+          <textarea
             name="recipe_name"
             value={inputs.recipe_name || ""}
             onChange={handleChange}
             required
+            className="form-input"
+            rows={1}
           />
         </label>
-        <label>
+        <label className="form-label">
           {" "}
           Enter your description:
-          <input
+          <textarea
             type="text"
             name="description"
             value={inputs.description || ""}
             onChange={handleChange}
             required
+            className="form-input"
+            rows={3}
           />
         </label>
-        <label>
+        <label className="form-label">
           {" "}
           Enter the cooking steps:
-          <input
+          <textarea
             type="text"
             name="steps"
             value={inputs.steps || ""}
             onChange={handleChange}
             required
+            className="form-input"
+            rows={3}
           />
         </label>
 
         <div>
-          <p>Add Ingredients:</p>
+          <p className="form-label">Add Ingredients:</p>
           <input
             type="text"
             name="ingredients"
             value={inputs.ingredients || ""}
             onChange={handleChange}
+            className="form-input"
           />
           <button
             onClick={() => {
@@ -94,85 +100,75 @@ function UploadPage() {
               setInputs("");
             }}
             type="button"
+            className="ingredient-add-button"
           >
             Add
           </button>
           <ul>
             {ingredients.map((ingredient) => (
-              <li key={ingredient.id}>
+              <li key={ingredient.id} className="ingredient-list">
                 {ingredient.name}
-                <button onClick={() => handleDeleteIngredient(ingredient.id)}>
+                <button onClick={() => handleDeleteIngredient(ingredient.id)} className="ingredient-delete-button">
                   Delete
                 </button>
               </li>
             ))}
           </ul>
         </div>
-        <label>
-          type of cuisine:
-          <select name="tag1" multiple={false} defaultValue="">
-            <option value="" disabled hidden>
-              select a cuisine
-            </option>
-            <option value="african">african</option>
-            <option value="mexican">mexican</option>
-            <option value="american">american</option>
-            <option value="italian">italian</option>
-            <option value="vietnamese">vietnamese</option>
-            <option value="korean">korean</option>
-            <option value="indian">indian</option>
-            <option value="thai">thai</option>
-            <option value="japanese">japanese</option>
-            <option value="french">french</option>
-            <option value="filipino">filipino</option>
-            <option value="no selection">not selection</option>
-          </select>
+        <span className="form-label">
+          Type of cuisine:
+          <ul name="tag1" className="checkbox">
+            <li><input type="checkbox" value="african" /> African</li>
+            <li><input type="checkbox" value="mexican" /> Mexican</li>
+            <li><input type="checkbox" value="american" /> American</li>
+            <li><input type="checkbox" value="italian" /> Italian</li>
+            <li><input type="checkbox" value="vietnamese" /> Vietnamese</li>
+            <li><input type="checkbox" value="korean" /> Korean</li>
+            <li><input type="checkbox" value="indian" /> Indian</li>
+            <li><input type="checkbox" value="thai" /> Thai</li>
+            <li><input type="checkbox" value="japanese" /> Japanese</li>
+            <li><input type="checkbox" value="french" /> French</li>
+            <li><input type="checkbox" value="filipino" /> Filipino</li>
+            <li><input type="checkbox" value="no selection" /> Other</li>
+          </ul>
+        </span>
+        <label className="form-label">
+          Vegan or Vegetarian:
+          <ul name="tag2" className="checkbox">
+            <li><input type="checkbox" value="african" /> Vegetarian</li>
+            <li><input type="checkbox" value="mexican" /> Vegan</li>
+          </ul>
         </label>
-        <label>
-          vegan or vegetarian:
-          <select name="tag2" multiple={false} defaultValue="">
-            <option value="" disabled hidden>
-              select a type
-            </option>
-            <option value="vegetarian">vegetarian</option>
-            <option value="vegan">vegan</option>
-          </select>
+        <label className="form-label">
+          Meat:
+          <ul name="tag3" className="checkbox">
+          <li><input type="checkbox" value="beef" /> Beef</li>
+          <li><input type="checkbox" value="chicken" /> Chicken</li>  
+          <li><input type="checkbox" value="pork" /> Pork</li>
+          <li><input type="checkbox" value="lamb" /> Lamb</li>
+          <li><input type="checkbox" value="seafood" /> Seafood</li>
+          <li><input type="checkbox" value="duck" /> Duck</li>
+          <li><input type="checkbox" value="turkey" /> Turkey</li>
+          <li><input type="checkbox" value="goat" /> Goat</li>
+          <li><input type="checkbox" value="eggs" /> Eggs</li>
+          <li><input type="checkbox" value="other" /> Other</li>
+          </ul>
         </label>
-        <label>
-          meat:
-          <select name="tag3" multiple={false} defaultValue="">
-            <option value="" disabled hidden>
-              select a type(s)
-            </option>
-            <option value="beef">beef</option>
-            <option value="chicken">chicken</option>
-            <option value="pork">pork</option>
-            <option value="lamb">lamb</option>
-            <option value="seafood">seafood</option>
-            <option value="duck">duck</option>
-            <option value="turkey">turkey</option>
-            <option value="goat">goat</option>
-            <option value="eggs">eggs</option>
-          </select>
-        </label>
-        <label>
-          allergens:
-          <select name="tag4" multiple={false} defaultValue="">
-            <option value="" disabled hidden>
-              select a type(s)
-            </option>
-            <option value="milk">milk</option>
-            <option value="eggs">eggs</option>
-            <option value="nuts">nuts</option>
-            <option value="wheat">wheat</option>
-            <option value="shellfish">shellfish</option>
-            <option value="soy">soy</option>
-            <option value="none">none</option>
-          </select>
+        <label className="form-label">
+          Allergens:
+          <ul name="tag4" className="checkbox">
+          <li><input type="checkbox" value="milk" /> Milk</li>
+          <li><input type="checkbox" value="eggs" /> Eggs</li>
+          <li><input type="checkbox" value="nuts" /> Nuts</li>
+          <li><input type="checkbox" value="wheat" /> Wheat</li>
+          <li><input type="checkbox" value="shellfish" /> Shellfish</li>
+          <li><input type="checkbox" value="soy" /> Soy</li>
+          <li><input type="checkbox" value="none" /> None</li>
+          </ul>
         </label>
         <hr />
-        <button type="reset">reset</button>
-        <button type="submit">submit</button>
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );
