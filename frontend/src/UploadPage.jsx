@@ -1,5 +1,6 @@
 import React, { use, useState } from "react";
 import "./UploadPage.css";
+import { useNavigate } from "react-router-dom";
 let nextId = 0;
 
 function UploadPage() {
@@ -11,6 +12,17 @@ function UploadPage() {
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/main`; 
+    navigate(path);
+  }
+  const isFormValid =
+  inputs.recipe_name?.trim() &&
+  inputs.description?.trim() &&
+  inputs.steps?.trim() &&
+  ingredients.length > 0;
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -34,6 +46,7 @@ function UploadPage() {
       },
       body: JSON.stringify(data),
     });
+    alert('Successfully Uploaded Page')
   };
 
   function handleDeleteIngredient(id) {
@@ -97,7 +110,7 @@ function UploadPage() {
                 ...ingredients,
                 { id: nextId++, name: inputs.ingredients },
               ]);
-              setInputs("");
+              setInputs((prev) => ({ ...prev, ingredients: "" }));
             }}
             type="button"
             className="ingredient-add-button"
@@ -115,60 +128,66 @@ function UploadPage() {
             ))}
           </ul>
         </div>
-        <span className="form-label">
+
+        <label className="form-label">
           Type of cuisine:
-          <ul name="tag1" className="checkbox">
-            <li><input type="checkbox" value="african" /> African</li>
-            <li><input type="checkbox" value="mexican" /> Mexican</li>
-            <li><input type="checkbox" value="american" /> American</li>
-            <li><input type="checkbox" value="italian" /> Italian</li>
-            <li><input type="checkbox" value="vietnamese" /> Vietnamese</li>
-            <li><input type="checkbox" value="korean" /> Korean</li>
-            <li><input type="checkbox" value="indian" /> Indian</li>
-            <li><input type="checkbox" value="thai" /> Thai</li>
-            <li><input type="checkbox" value="japanese" /> Japanese</li>
-            <li><input type="checkbox" value="french" /> French</li>
-            <li><input type="checkbox" value="filipino" /> Filipino</li>
-            <li><input type="checkbox" value="no selection" /> Other</li>
+          <ul className="checkbox">
+            <li><input type="checkbox" name="african" value="african" /> African</li>
+            <li><input type="checkbox" name="mexican" value="mexican" /> Mexican</li>
+            <li><input type="checkbox" name="american" value="american" /> American</li>
+            <li><input type="checkbox" name="italian" value="italian" /> Italian</li>
+            <li><input type="checkbox" name="vietnamese" value="vietnamese" /> Vietnamese</li>
+            <li><input type="checkbox" name="korean" value="korean" /> Korean</li>
+            <li><input type="checkbox" name="indian" value="indian" /> Indian</li>
+            <li><input type="checkbox" name="thai" value="thai" /> Thai</li>
+            <li><input type="checkbox" name="japanese" value="japanese" /> Japanese</li>
+            <li><input type="checkbox" name="french" value="french" /> French</li>
+            <li><input type="checkbox" name="filipino" value="filipino" /> Filipino</li>
+            <li><input type="checkbox" name="no selection" value="no selection" /> Other</li>
           </ul>
-        </span>
+        </label>
+
         <label className="form-label">
           Vegan or Vegetarian:
-          <ul name="tag2" className="checkbox">
-            <li><input type="checkbox" value="african" /> Vegetarian</li>
-            <li><input type="checkbox" value="mexican" /> Vegan</li>
+          <ul className="checkbox">
+            <li><input type="checkbox" name="vegetarian" value="vegetarian" /> Vegetarian</li>
+            <li><input type="checkbox" name="vegan" value="vegan" /> Vegan</li>
           </ul>
         </label>
+
         <label className="form-label">
           Meat:
-          <ul name="tag3" className="checkbox">
-          <li><input type="checkbox" value="beef" /> Beef</li>
-          <li><input type="checkbox" value="chicken" /> Chicken</li>  
-          <li><input type="checkbox" value="pork" /> Pork</li>
-          <li><input type="checkbox" value="lamb" /> Lamb</li>
-          <li><input type="checkbox" value="seafood" /> Seafood</li>
-          <li><input type="checkbox" value="duck" /> Duck</li>
-          <li><input type="checkbox" value="turkey" /> Turkey</li>
-          <li><input type="checkbox" value="goat" /> Goat</li>
-          <li><input type="checkbox" value="eggs" /> Eggs</li>
-          <li><input type="checkbox" value="other" /> Other</li>
+          <ul className="checkbox">
+            <li><input type="checkbox" name="beef" value="beef" /> Beef</li>
+            <li><input type="checkbox" name="chicken" value="chicken" /> Chicken</li>  
+            <li><input type="checkbox" name="pork" value="pork" /> Pork</li>
+            <li><input type="checkbox" name="lamb" value="lamb" /> Lamb</li>
+            <li><input type="checkbox" name="seafood" value="seafood" /> Seafood</li>
+            <li><input type="checkbox" name="duck" value="duck" /> Duck</li>
+            <li><input type="checkbox" name="turkey" value="turkey" /> Turkey</li>
+            <li><input type="checkbox" name="goat" value="goat" /> Goat</li>
+            <li><input type="checkbox" name="eggs" value="eggs" /> Eggs</li>
+            <li><input type="checkbox" name="other" value="other" /> Other</li>
           </ul>
         </label>
+
         <label className="form-label">
-          Allergens:
-          <ul name="tag4" className="checkbox">
-          <li><input type="checkbox" value="milk" /> Milk</li>
-          <li><input type="checkbox" value="eggs" /> Eggs</li>
-          <li><input type="checkbox" value="nuts" /> Nuts</li>
-          <li><input type="checkbox" value="wheat" /> Wheat</li>
-          <li><input type="checkbox" value="shellfish" /> Shellfish</li>
-          <li><input type="checkbox" value="soy" /> Soy</li>
-          <li><input type="checkbox" value="none" /> None</li>
+        Allergens:
+          <ul className="checkbox">
+            <li><input type="checkbox" name="milk" value="milk" /> Milk</li>
+            <li><input type="checkbox" name="eggs" value="eggs" /> Eggs</li>
+            <li><input type="checkbox" name="nuts" value="nuts" /> Nuts</li>
+            <li><input type="checkbox" name="wheat" value="wheat" /> Wheat</li>
+            <li><input type="checkbox" name="shellfish" value="shellfish" /> Shellfish</li>
+            <li><input type="checkbox" name="soy" value="soy" /> Soy</li>
+            <li><input type="checkbox" name="none" value="none" /> None</li>
           </ul>
         </label>
+
+
         <hr />
         <button type="reset">Reset</button>
-        <button type="submit">Submit</button>
+        <button type="submit" onClick={routeChange} disabled={!isFormValid}>Submit</button>
       </form>
     </>
   );
