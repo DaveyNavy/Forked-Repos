@@ -46,3 +46,40 @@ await sql.query(`CREATE TABLE IF NOT EXISTS recipe_comments (
     author VARCHAR(255) REFERENCES users(username),
     comment TEXT
 )`);
+
+const tags = [
+  "african",
+  "mexican",
+  "american",
+  "italian",
+  "vietnamese",
+  "korean",
+  "indian",
+  "thai",
+  "japanese",
+  "french",
+  "filipino",
+  "no selection",
+  "vegetarian",
+  "vegan",
+  "beef",
+  "chicken",
+  "pork",
+  "lamb",
+  "seafood",
+  "duck",
+  "turkey",
+  "goat",
+  "eggs",
+  "other",
+  "milk",
+  "nuts",
+  "wheat",
+  "shellfish",
+  "soy",
+  "none",
+];
+
+tags.forEach(async (tag) => {
+  await sql.query("INSERT INTO tags (name) VALUES ($1)", [tag]);
+});
